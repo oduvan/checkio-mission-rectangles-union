@@ -1,16 +1,35 @@
-def sum_two(a, b):
-    """
-        sums two passed arguments
-    """
+from typing import List, Tuple
+
+def rectangles_union(recs: List[Tuple[int]]) -> int:
     # your code here
-    return None
+    return 0
 
 
 if __name__ == '__main__':
     print("Example:")
-    print(sum_two(3, 2))
+    print(rectangles_union([
+        (6, 3, 8, 10),
+        (4, 8, 11, 10),
+        (16, 8, 19, 11)
+    ]))
     
     # These "asserts" are used for self-checking and not for an auto-testing
-    assert sum_two(3, 2) == 5, "First"
-    assert sum_two(5, 7) == 12, "Second"
+    assert rectangles_union([
+        (6, 3, 8, 10),
+        (4, 8, 11, 10),
+        (16, 8, 19, 11)
+    ]) == 33
+    assert rectangles_union([
+        (16, 8, 19, 11)
+    ]) == 9
+    assert rectangles_union([
+        (16, 8, 19, 11),
+        (16, 8, 19, 11)
+    ]) == 9
+    assert rectangles_union([
+        (16, 8, 16, 8)
+    ]) == 0
+    assert rectangles_union([
+        
+    ]) == 0
     print("Coding complete? Click 'Check' to earn cool rewards!")

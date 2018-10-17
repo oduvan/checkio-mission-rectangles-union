@@ -1,8 +1,6 @@
 "use strict";
 
-function sumTwo(a, b) {
-    // sums two passed arguments
-
+function rectanglesUnion(recs) {
     // your code here
     return 0;
 }
@@ -10,10 +8,30 @@ function sumTwo(a, b) {
 var assert = require('assert');
 if (!global.is_checking) {
     console.log('Example:')
-    console.log(sumTwo(3, 2))
+    console.log(rectanglesUnion([
+        [6, 3, 8, 10],
+        [4, 8, 11, 10],
+        [16, 8, 19, 11]
+    ]))
 
     // These "asserts" are used for self-checking and not for an auto-testing
-    assert.equal(sumTwo(3, 2), 5)
-    assert.equal(sumTwo(5, 7), 12)
+    assert.equal(rectanglesUnion([
+        [6, 3, 8, 10],
+        [4, 8, 11, 10],
+        [16, 8, 19, 11]
+    ]), 33)
+    assert.equal(rectanglesUnion([
+        [16, 8, 19, 11]
+    ]), 9)
+    assert.equal(rectanglesUnion([
+        [16, 8, 19, 11],
+        [16, 8, 19, 11]
+    ]), 9)
+    assert.equal(rectanglesUnion([
+        [16, 8, 16, 8]
+    ]), 0)
+    assert.equal(rectanglesUnion([
+        
+    ]), 0)
     console.log("Coding complete? Click 'Check' to earn cool rewards!");
 }
