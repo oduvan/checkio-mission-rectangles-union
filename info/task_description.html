@@ -1,16 +1,18 @@
 <!-- Describe task in general -->
 
 <p>
-    Sum two passed ints
+    Your mission is to calculate the area covered by a union of rectangles. The rectangles can have a non-empty intersection, which means that a simple sum of given rectangle areas doesn't work. Every rectangle is represented as 4 integers. The first two integers are the coordinates of a left-top corner, and the next two - of a bottom right corner.
 </p>
 
-<p style="text-align: center;">
-    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
-</p>
 
 <!-- Explain input and output values -->
 <p>
-    <strong>Input: </strong> Two arguments. Both are int
+    <strong>Input: </strong>
+    {% if interpreter.slug == "js-node" %}
+        Array of arrays.
+    {% else %}
+        Iterable with tuples. 
+    {% endif %}
 </p>
 
 <p>
@@ -25,25 +27,19 @@
     </p>
 
 {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">sumTwo(2, 3) == 5
-sumTwo(5, 7) == 12
+<pre class="brush: javascript">rectanglesUnion([
+    (6, 3, 8, 10),
+    (4, 8, 11, 10),
+    (16, 8, 19, 11)
+]) == 33
 </pre>
 {% else %}
-<pre class="brush: python">sum_two(2, 3) == 5
-sum_two(5, 7) == 12
+<pre class="brush: python">
+rectangles_union([
+    (6, 3, 8, 10),
+    (4, 8, 11, 10),
+    (16, 8, 19, 11)
+]) == 33
 </pre>
 {% endif %}
 </div>
-<!-- Here you can explain how it can be used in development and what is usage of this. -->
-<!-- The section is optional -->
-<p class="for_info_only">
-    <strong>How it is used: </strong>
-    <i>(math is used everywhere)</i>
-</p>
-
-<!-- Here you can explain some constraints for input-->
-<!-- The section is optional -->
-<p>
-    <strong>Precondition:</strong>
-    <i>both given ints should be between -1000 and 1000</i>
-</p>
