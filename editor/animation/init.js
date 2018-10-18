@@ -40,7 +40,7 @@ requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
                 }
             };
             let [min_x, min_y, max_x, max_y] = [100, 100, 0, 0];
-            let neg = 0;
+            let [neg_x, neg_y] = [0, 0];
 
             // check input empty ?
             input = input.length ? input: [[10, 0, 10, 5]];
@@ -52,40 +52,42 @@ requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
                 min_y = Math.min(min_y, sy-1);
                 max_x = Math.max(max_x, ex+1);
                 max_y = Math.max(max_y, ey+1);
-                neg = Math.min(...[neg, sx-1, sy-1]);
+                neg_x = Math.min(...[neg_x, sx-1]);
+                neg_y = Math.min(...[neg_y, sy-1]);
 
             });
 
-            const SIZE = Math.min(250/(max_x-neg), 250/(max_y-neg));
+            const SIZE = Math.min(250/(max_x-neg_x), 250/(max_y-neg_y));
             const os = 20;
 
             // canvas
             const paper = Raphael(dom, 250+(os*2),
-                SIZE*(max_y-neg)+os*1.5, 0, 0);
+                SIZE*(max_y-neg_y)+os*1.5, 0, 0);
 
             // scale column (number and line)
             for (let i = Math.min(0, min_x); i <= max_x; i += 1) { 
                 if (i % 5 === 0) {
-                    paper.text(os+(i-neg)*SIZE, os/2, i).attr(
+                    paper.text(os+(i-neg_x)*SIZE, os/2, i).attr(
                         attr.text.scale);
-                    paper.path('M' + (os+(i-neg)*SIZE) + ',' + os +
-                        ' l0,' + ((max_y-neg)*SIZE)).attr(attr.line.scale); 
+                    paper.path('M' + (os+(i-neg_x)*SIZE) + ',' + os +
+                        ' l0,' + ((max_y-neg_y)*SIZE)).attr(
+                            attr.line.scale); 
                 }
             }
 
             // scale row (number and line)
             for (let i = Math.min(0, min_y)+1; i <= max_y; i += 1) { 
                 if (i % 5 === 0) {
-                    paper.text(os/2, os+(i-neg)*SIZE, i).attr(
+                    paper.text(os/2, os+(i-neg_y)*SIZE, i).attr(
                         attr.text.scale);
-                    paper.path('M' + os + ',' + (os+(i-neg)*SIZE) + ' l' +
-                        ((max_x-neg)*SIZE) + ',0').attr(attr.line.scale); 
+                    paper.path('M' + os + ',' + (os+(i-neg_y)*SIZE) + ' l' +
+                        ((max_x-neg_x)*SIZE) + ',0').attr(attr.line.scale); 
                 }
             }
 
             // draw grid
-            for (let x=0; x < max_x-neg; x += 1) {
-                for (let y=0; y < max_y-neg; y += 1) {
+            for (let x=0; x < max_x-neg_x; x += 1) {
+                for (let y=0; y < max_y-neg_y; y += 1) {
                         paper.rect(x*SIZE+os, y*SIZE+os, SIZE, SIZE).attr(
                             attr.rect.grid);
                 }
@@ -96,13 +98,13 @@ requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
                 const [sx, sy, ex, ey] = rect;
 
                 // frame
-                paper.rect((sx-neg)*SIZE+os, (sy-neg)*SIZE+os,
+                paper.rect((sx-neg_x)*SIZE+os, (sy-neg_y)*SIZE+os,
                     (ex-sx)*SIZE, (ey-sy)*SIZE).attr(attr.rect.frame);
 
                 // squares
                 for (let r=sy; r < ey; r += 1) {
                     for (let c=sx; c < ex; c += 1) {
-                        paper.rect((c-neg)*SIZE+os, (r-neg)*SIZE+os,
+                        paper.rect((c-neg_x)*SIZE+os, (r-neg_y)*SIZE+os,
                             SIZE, SIZE).attr(attr.rect.squre);
                     }
                 }
