@@ -63,6 +63,15 @@ TESTS = {
                 [4, 8, 6, 12]
             ]],
             "answer": 37
+        },
+        {
+            "input": [[
+                [-3, -3, -1, -1],
+                [-2, -2, 0, 0],
+                [-1, -1, 1, 1]
+            ]],
+            "answer": 10,
+            "explanation": "Negatives coordinates are expected as well"
         }
     ]
 }
